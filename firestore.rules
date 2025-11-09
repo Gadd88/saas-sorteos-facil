@@ -1,0 +1,38 @@
+// firestore.rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == userId;
+    }
+    
+    // Raffles
+    match /raffles/{raffleId} {
+      // Cualquiera puede leer sorteos activos (para compradores)
+      allow read: if true;
+      
+      // Solo el dueño puede crear/editar
+      allow create: if request.auth != null && 
+                       request.resource.data.ownerId == request.auth.uid;
+      allow update, delete: if request.auth != null && 
+                               resource.data.ownerId == request.auth.uid;
+      
+      // Tickets dentro del sorteo
+      match /tickets/{ticketNumber} {
+        // Cualquiera puede leer
+        allow read: if true;
+        
+        // Solo el dueño del sorteo puede marcar como vendido
+        allow update: if request.auth != null && 
+                        get(/databases/$(database)/documents/raffles/$(raffleId)).data.ownerId == request.auth.uid;
+        
+        // Los compradores pueden reservar si está disponible
+        allow update: if resource.data.status == 'available' &&
+                        request.resource.data.status == 'reserved';
+      }
+    }
+  }
+}
