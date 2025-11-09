@@ -9,35 +9,10 @@ export const Landing = () => {
         <div className="min-h-screen">
             {/* Hero Section */}
             <div className="bg-linear-to-br from-blue-600 to-indigo-700 text-white">
-                {/* <nav className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-          <div className="text-2xl font-bold">🎟️ SorteosFácil</div>
-          <div className="space-x-4">
-            {user ? (
-              <Link
-                to="/dashboard"
-                className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100"
-              >
-                Mi Dashboard
-              </Link>
-            ) : (
-              <>
-                <Link to="/login" className="hover:underline">
-                  Iniciar Sesión
-                </Link>
-                <Link
-                  to="/register"
-                  className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100"
-                >
-                  Registrarse Gratis
-                </Link>
-              </>
-            )}
-          </div>
-        </nav> */}
                 <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
                     {/* Logo */}
                     <div className="text-2xl font-bold text-center sm:text-left">
-                        🎟️ SorteosFácil
+                        🎟️ Sorteos Fácil
                     </div>
 
                     {/* Links */}
