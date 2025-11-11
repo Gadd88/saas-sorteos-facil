@@ -26,7 +26,7 @@ export const CreateRaffleView = () => {
       const raffleId = await raffleService.createRaffle({
         ownerId: user.uid,
         ownerName: user.displayName || user.email || '',
-        ownerWhatsApp: formData.ownerWhatsApp.replace(/\D/g, ''), // Solo números
+        ownerWhatsApp: `+54${formData.ownerWhatsApp.replace(/\D/g, '')}`, // Solo números
         title: formData.title,
         description: formData.description,
         prizeDescription: formData.prizeDescription,
@@ -61,6 +61,7 @@ export const CreateRaffleView = () => {
       slug: generateSlug(value)
     });
   };
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -163,8 +164,8 @@ export const CreateRaffleView = () => {
               <input
                 type="tel"
                 value={formData.ownerWhatsApp}
-                onChange={(e) => setFormData({...formData, ownerWhatsApp: `+54${e.target.value.replace(/\s+/g, '')}`.trim()})}
-                placeholder="11 1234-5678"
+                onChange={(e) => setFormData({...formData, ownerWhatsApp: e.target.value})}
+                placeholder="1112345678"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />
