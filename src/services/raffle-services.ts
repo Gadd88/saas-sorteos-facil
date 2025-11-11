@@ -16,6 +16,19 @@ import {
 import { db } from '../config/firebase';
 import type { Raffle, Ticket } from '../types';
 
+const slugExists = async (slug: string): Promise<boolean> => {
+  const q = query(
+    collection(db, 'raffles'), where(slug, "==", slug)
+  );
+  const snapshot = await getDocs(q);
+  return !snapshot.empty;
+}
+
+async function generateUniqueSlug(baseSlug: string): Promise<string> {
+  return `${baseSlug}-${Date.now()}`
+}
+
+
 export const raffleService = {
   // Crear nuevo sorteo con 100 números
   async createRaffle(raffleData: Omit<Raffle, 'id' | 'createdAt'>) {
@@ -27,9 +40,12 @@ export const raffleService = {
       throw new Error('Límite de sorteos alcanzado. El usuario no puede crear más de 5 sorteos.');
     }
     try {
+      if(await slugExists(raffleData.slug)) throw new Error('El slug ya existe, por favor elija otro diferente.')
+      
       const raffleRef = await addDoc(collection(db, 'raffles'), {
         ...raffleData,
         createdAt: serverTimestamp(),
+        slug: await generateUniqueSlug(raffleData.slug),
         isActive: true
       });
   
