@@ -146,7 +146,7 @@ export const NumberGrid = ({
         if (!selectedNumber || loading) return;
 
         if (!buyerData.name.trim() || !buyerData.phone.trim()) {
-            alert("Por favor completa todos los campos obligatorios");
+            toast.error("Por favor completa todos los campos obligatorios");
             return;
         }
 
@@ -180,10 +180,10 @@ export const NumberGrid = ({
             setSelectedNumber(null);
 
             // Mostrar mensaje de éxito
-            alert("✅ ¡Número reservado! Ahora coordina el pago por WhatsApp.");
+            toast.success("✅ ¡Número reservado! Ahora coordina el pago por WhatsApp.");
         } catch (error) {
             console.error("Error al reservar:", error);
-            alert("Error al reservar el número. Por favor intenta nuevamente.");
+            toast.error("Error al reservar el número. Por favor intenta nuevamente.");
         } finally {
             setLoading(false);
         }

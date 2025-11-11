@@ -89,8 +89,8 @@ export const CreateRaffleView = () => {
               <label className="block text-sm font-medium mb-2">
                 URL del Sorteo
               </label>
-              <div className="flex items-center">
-                <span className="text-gray-500 mr-2">tudominio.com/s/</span>
+              <div className="flex flex-col lg:flex-row items-start lg:items-center">
+                <span className="text-gray-500 mr-2">saas-sorteos-facil.vercel.app/s/</span>
                 <input
                   type="text"
                   value={formData.slug}
@@ -163,13 +163,13 @@ export const CreateRaffleView = () => {
               <input
                 type="tel"
                 value={formData.ownerWhatsApp}
-                onChange={(e) => setFormData({...formData, ownerWhatsApp: e.target.value})}
-                placeholder="+54 9 11 1234-5678"
+                onChange={(e) => setFormData({...formData, ownerWhatsApp: `+54${e.target.value.replace(/\s+/g, '')}`.trim()})}
+                placeholder="11 1234-5678"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />
               <p className="text-xs text-gray-500 mt-1">
-                Incluye código de país (ej: +54 para Argentina)
+                Sin espacios ni guiones, ni 0 ni 15. Ej: 1198765432
               </p>
             </div>
 
