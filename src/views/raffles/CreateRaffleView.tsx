@@ -2,6 +2,7 @@
 import { useAuth } from '@/hooks/useAuth';
 import { raffleService } from '@/services/raffle-services';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 export const CreateRaffleView = () => {
@@ -37,7 +38,7 @@ export const CreateRaffleView = () => {
       navigate(`/dashboard/raffle/${raffleId}`);
     } catch (error) {
       console.error('Error creando sorteo:', error);
-      alert('Error al crear el sorteo.' + (error as Error).message);
+      toast.error('Error al crear el sorteo.' + (error as Error).message);
       navigate('/dashboard');
     } finally {
       setLoading(false);

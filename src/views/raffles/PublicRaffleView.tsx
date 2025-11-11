@@ -3,6 +3,7 @@ import { NumberGrid } from '@/components';
 import { raffleService } from '@/services/raffle-services';
 import type { Raffle } from '@/types';
 import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
 export const PublicRaffleView = () => {
@@ -21,12 +22,12 @@ export const PublicRaffleView = () => {
       const data = await raffleService.getRaffle(slug);
       
       if (!data) {
-        alert('Sorteo no encontrado');
+        toast.error('Sorteo no encontrado');
         return;
       }
 
       if (!data.isActive) {
-        alert('Este sorteo ya no está activo');
+        toast.error('Este sorteo ya no está activo');
       }
 
       setRaffle(data);

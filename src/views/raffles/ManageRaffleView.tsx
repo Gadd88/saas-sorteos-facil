@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { raffleService } from "@/services/raffle-services";
 import type { Raffle, Ticket } from "@/types";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 
 export const ManageRaffleView = () => {
@@ -35,13 +36,13 @@ export const ManageRaffleView = () => {
             const raffleData = await raffleService.getRaffle(id);
 
             if (!raffleData) {
-                alert("Sorteo no encontrado");
+                toast.error("Sorteo no encontrado");
                 navigate("/dashboard");
                 return;
             }
 
             if (raffleData.ownerId !== user?.uid) {
-                alert("No tienes permiso para gestionar este sorteo");
+                toast.error("No tienes permiso para gestionar este sorteo");
                 navigate("/dashboard");
                 return;
             }
@@ -74,7 +75,7 @@ export const ManageRaffleView = () => {
             raffle?.slug || raffle?.id
         }`;
         navigator.clipboard.writeText(link);
-        alert("¡Link copiado al portapapeles!");
+        toast.success("¡Link copiado al portapapeles!");
     };
 
     const exportReservedNumbers = () => {

@@ -31,6 +31,17 @@ export interface Ticket {
   soldAt?: Timestamp | null;
 }
 
+// export interface Ticket2 {
+//   id: string;
+//   raffleId: string;
+//   number: number; // Cambiado: ahora soporta 0-999
+//   status: 'disponible' | 'reservado' | 'vendido';
+//   buyerName?: string;
+//   buyerPhone?: string;
+//   createdAt: Timestamp;
+//   updatedAt: Timestamp;
+// }
+
 // Estructura en Firestore:
 // raffles/{raffleId}
 // raffles/{raffleId}/tickets/{ticketNumber}
