@@ -52,7 +52,7 @@ export const raffleService = {
       // Crear los 100 tickets
       const batch = writeBatch(db);
       // let createdCount = 0
-      for (let i = 1; i <= 100; i++) {
+      for (let i = 0; i <= 99; i++) {
         const ticketRef = doc(db, `raffles/${raffleRef.id}/tickets`, i.toString());
         batch.set(ticketRef, {
           number: i,
